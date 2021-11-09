@@ -9,12 +9,14 @@ class Sala
 {
 private:
     int numero;
+    int numFilas;
+    int numColumnas;
     vector<vector<bool>> asientos;
     vector<char> filas;
 
 public:
     Sala();
-    Sala(int numero, int filas, int columnas);
+    Sala(int numero, int numFilas, int numColumnas);
     void mostrarInfo();
     void ocuparAsiento(char fila, int columna);
     void limpiar();
