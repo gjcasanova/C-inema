@@ -20,6 +20,7 @@ public:
     void mostrarInfo();
     void ocuparAsiento(char fila, int columna);
     void limpiar();
+    bool estaDisponible(char fila, int columna);
 };
 
 #endif

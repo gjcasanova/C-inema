@@ -10,7 +10,7 @@ using namespace std;
 class Cine
 {
 private:
-    static const float PRECIO_BOLETO = 3.15;
+    float precio_boleto;
     vector<Sala> salas;
     vector<Pelicula> peliculas;
 
