@@ -7,7 +7,10 @@
 #include "sala.h"
 #include "pelicula.h"
 #include "boleto.h"
-
+#include "kiosco.h"
+#include "producto.h"
+#include "productoU.h"
+#include "productoC.h"
 using namespace std;
 
 class Cine
@@ -15,6 +18,7 @@ class Cine
 private:
     vector<Sala> salas;
     vector<Pelicula> cartelera;
+    Kiosco kiosco;
 
 public:
     Cine();

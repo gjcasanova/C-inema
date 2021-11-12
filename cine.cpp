@@ -1,6 +1,7 @@
 #include "cine.h"
 #include "pelicula.h"
 #include "sala.h"
+#include "kiosco.h"
 
 Cine::Cine()
 {
@@ -23,6 +24,8 @@ void Cine::generarDatos()
                    Sala(3, 5, 5),
                    Sala(4, 5, 5),
                    Sala(5, 5, 5)};
+
+    this->kiosco = Kiosco();
 }
 
 void Cine::mostrarCartelera()
@@ -86,7 +89,6 @@ void Cine::comprarBoletos()
                  << endl;
     } while (numeroBoletos <= 0);
 
-
     // Valida que exista la cantidad de boletos que desea el usuario.
     if (numeroBoletos > this->salas[peliculaId - 1].getAsientosDisponibles())
     {
@@ -99,7 +101,7 @@ void Cine::comprarBoletos()
     for (int i = 1; i <= numeroBoletos; i++)
     {
         char f; // Fila
-        int c; // Columna
+        int c;  // Columna
         do
         {
             cout << "Boleto # " << i << endl;
@@ -157,7 +159,8 @@ int Cine::activarMenuPrincipal()
     cout << "1. Mostrar Cartelera" << endl
          << "2. Mostrar Sala" << endl
          << "3. Comprar boletos" << endl
-         << "4. Salir" << endl
+         << "4. Ir al kiosco" << endl
+         << "5. Salir" << endl
          << endl;
 
     int op = 0;
@@ -166,11 +169,11 @@ int Cine::activarMenuPrincipal()
         cout << "Ingrese su opcion:" << endl;
         cin >> op;
         cout << endl;
-        if (op < 1 || op > 4)
+        if (op < 1 || op > 5)
             cout << "Opcion invalida, intente de nuevo." << endl
                  << endl;
 
-    } while (op < 1 || op > 4);
+    } while (op < 1 || op > 5);
 
     return op;
 }
@@ -199,6 +202,9 @@ void Cine::activarConsola()
             this->comprarBoletos();
             break;
 
+        case 4:
+            this->kiosco.activarConsola();
+            break;
         default:
             break;
         }
