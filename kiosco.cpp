@@ -1,6 +1,7 @@
 #include "kiosco.h"
 #include "producto.h"
 #include "productoU.h"
+#include "productoC.h"
 
 Kiosco::Kiosco()
 {
@@ -9,13 +10,19 @@ Kiosco::Kiosco()
 
 void Kiosco::generarDatos()
 {
-    ProductoU canguil = ProductoU(1, 'Canguil', (float)3.5);
-    ProductoU nachos = ProductoU(1, 'Nachos', (float)4);
-    ProductoU gaseosa = ProductoU(1, 'Gaseosa', (float)2.75);
+    Producto canguil = ProductoU(1, "Canguil", (float)3.5);
+    Producto nachos = ProductoU(2, "Nachos", (float)4);
+    Producto gaseosa = ProductoU(3, "Gaseosa", (float)2.75);
 
     this->productos.push_back(canguil);
     this->productos.push_back(nachos);
     this->productos.push_back(gaseosa);
+
+    Producto comboIndividual = ProductoC(4, "Combo individual", float(8), {canguil, gaseosa, nachos});
+    Producto comboEconomico = ProductoC(5, "Combo economico", float(6), {canguil, gaseosa});
+
+    this->productos.push_back(comboIndividual);
+    this->productos.push_back(comboEconomico);
 }
 
 int Kiosco::activarMenu()
@@ -71,7 +78,7 @@ void Kiosco::comprarProductos()
 {
     int op;
     char salir;
-    float totalCompra;
+    float totalCompra = 0;
     vector<Producto> carrito;
 
     do
@@ -101,8 +108,9 @@ void Kiosco::comprarProductos()
     {
         carrito[i].mostrarInfo();
     }
-
-    cout << "Total: $" << totalCompra << endl;
+    cout << endl;
+    cout << "Total: $ " << totalCompra << endl
+         << endl;
 }
 
 void Kiosco::mostrarMenu()

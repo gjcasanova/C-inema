@@ -19,6 +19,7 @@ public:
     Producto(int id, string nombre, float precio);
     float getPrecio();
     void mostrarInfo();
+    string getNombre();
 };
 
 #endif

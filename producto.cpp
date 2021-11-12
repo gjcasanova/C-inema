@@ -23,3 +23,8 @@ void Producto::mostrarInfo()
 {
     cout << this->id << ". " << this->nombre << " [$ " << this->precio << "]" << endl;
 }
+
+string Producto::getNombre()
+{
+    return this->nombre;
+}

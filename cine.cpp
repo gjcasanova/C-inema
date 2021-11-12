@@ -24,8 +24,6 @@ void Cine::generarDatos()
                    Sala(3, 5, 5),
                    Sala(4, 5, 5),
                    Sala(5, 5, 5)};
-
-    this->kiosco = Kiosco();
 }
 
 void Cine::mostrarCartelera()
@@ -208,5 +206,5 @@ void Cine::activarConsola()
         default:
             break;
         }
-    } while (op != 4);
+    } while (op != 5);
 }
