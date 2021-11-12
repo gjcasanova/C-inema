@@ -9,11 +9,11 @@
 class ProductoC : public Producto
 {
 private:
-    vector<Producto> subproductos;
+    vector<Producto *> subproductos;
 
 public:
-    ProductoC(int id, string nombre, float precio, vector<Producto> subproductos);
-    void mostrarInfo();
+    ProductoC(int id, string nombre, float precio, vector<Producto *> subproductos);
+    virtual void mostrarInfo();
 };
 
 #endif

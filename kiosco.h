@@ -9,7 +9,7 @@
 class Kiosco
 {
 private:
-    vector<Producto> productos;
+    vector<Producto *> productos;
     void generarDatos();
 
 public:

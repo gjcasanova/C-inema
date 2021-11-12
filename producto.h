@@ -18,7 +18,7 @@ public:
     Producto();
     Producto(int id, string nombre, float precio);
     float getPrecio();
-    void mostrarInfo();
+    virtual void mostrarInfo();
     string getNombre();
 };
 
