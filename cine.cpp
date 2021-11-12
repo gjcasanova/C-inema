@@ -10,11 +10,11 @@ Cine::Cine()
 void Cine::generarDatos()
 {
     this->cartelera = {
-        Pelicula(1, "El Rey Leon", (float)117, true, "14:30"),
-        Pelicula(2, "Spiderman: Lejos de Casa", (float)130, true, "16:00"),
-        Pelicula(3, "Anabelle 3: Vuelve a Casa", (float)106, false, "18:20"),
-        Pelicula(4, "Avengers: End Game", (float)188, false, "16:15"),
-        Pelicula(5, "Toy Story 4", (float)100, false, "11:30")};
+        Pelicula(1, "El Rey Leon", (float)117, true, "10:30", (float)5, true),
+        Pelicula(2, "Spiderman: Lejos de Casa", (float)130, true, "16:00", (float)3, false),
+        Pelicula(3, "Anabelle 3: Vuelve a Casa", (float)106, false, "18:20", (float)3.5, false),
+        Pelicula(4, "Avengers: End Game", (float)188, false, "11:15", (float)6, true),
+        Pelicula(5, "Toy Story 4", (float)100, false, "11:30", (float)3.5, false)};
 
     this->salas = {Sala(1, 5, 5),
                    Sala(2, 5, 5),
@@ -28,7 +28,8 @@ void Cine::mostrarCartelera()
     cout << "-- CARTELERA --" << endl;
     for (int i = 0; i < this->cartelera.size(); i++)
         this->cartelera[i].mostrarInfo();
-    cout << endl;
+    cout << endl
+         << endl;
 }
 
 void Cine::mostrarSala()
@@ -38,17 +39,20 @@ void Cine::mostrarSala()
     {
         cout << "Ingrese el id de la pelicula: " << endl;
         cin >> peliculaId;
+        cout << endl;
         if (peliculaId < 1 || peliculaId > this->salas.size())
-            cout << "Id invalido, intente de nuevo" << endl;
+            cout << "Id invalido, intente de nuevo" << endl
+                 << endl;
     } while (peliculaId < 1 || peliculaId > this->salas.size());
 
-    this->salas[peliculaId].mostrarInfo();
+    this->salas[peliculaId - 1].mostrarInfo();
+    cout << endl;
 }
 
 void Cine::comprarBoletos()
 {
     int peliculaId = -1, columna = -1, numeroBoletos = 0;
-    char fila = ' ', cancelar = 'n';
+    char fila = ' ';
     vector<Boleto> carritoCompra;
 
     // Seleccion de la pelicula
@@ -56,26 +60,35 @@ void Cine::comprarBoletos()
     {
         cout << "Seleccione el id de la pelicula: " << endl;
         cin >> peliculaId;
+        cout << endl;
         if (peliculaId < 1 || peliculaId > this->cartelera.size())
-            cout << "El id no es valido, intente de nuevo." << endl;
+            cout << "El id no es valido, intente de nuevo." << endl
+                 << endl;
 
     } while (peliculaId < 1 || peliculaId > this->cartelera.size());
+
+    this->cartelera[peliculaId - 1].mostrarInfo();
+    this->salas[peliculaId - 1].mostrarInfo();
 
     // Numero de boletos
     do
     {
         cout << "Ingrese el numero de boletos:" << endl;
         cin >> numeroBoletos;
+        cout << endl;
         if (numeroBoletos <= 0)
-            cout << "Numero invalido, intente de nuevo." << endl;
+            cout << "Numero invalido, intente de nuevo." << endl
+                 << endl;
     } while (numeroBoletos <= 0);
 
-    if (numeroBoletos < this->salas[peliculaId - 1].getAsientosDisponibles())
+    if (numeroBoletos > this->salas[peliculaId - 1].getAsientosDisponibles())
     {
-        cout << "No hay disponibilidad de asientos. Cancelando compra..." << endl;
+        cout << "No hay disponibilidad de asientos. Cancelando compra..." << endl
+             << endl;
         return;
     }
 
+    float subtotalCompra = 0;
     for (int i = 1; i <= numeroBoletos; i++)
     {
         char f;
@@ -85,23 +98,42 @@ void Cine::comprarBoletos()
             cout << "Boleto # " << i << endl;
             cout << "Ingrese el asiento: " << endl;
             cin >> f >> c;
+            cout << endl;
             if (!this->salas[peliculaId - 1].estaDisponible(f, c))
-                cout << "Este asiento no esta disponible, intente de nuevo" << endl;
+                cout << "Este asiento no esta disponible, intente de nuevo" << endl
+                     << endl;
 
         } while (!this->salas[peliculaId - 1].estaDisponible(f, c));
 
-        this->salas[peliculaId - 1].ocuparAsiento(f, c);
+        char descuento = 'n';
+        cout << "presione 's' para aplicar un descuento de ninos y acianos en este boleto, u otro caracter para ignorar:" << endl;
+        cin >> descuento;
+        cout << endl;
+
+        if (descuento == 's')
+            subtotalCompra += this->cartelera[peliculaId - 1].getPrecio() * 0.5; // Descuento del 50%
+        else
+            subtotalCompra += this->cartelera[peliculaId - 1].getPrecio();
+
+        this->salas[peliculaId - 1]
+            .ocuparAsiento(f, c);
         Boleto b = Boleto(this->cartelera[peliculaId - 1], peliculaId, f, c);
         carritoCompra.push_back(b);
     }
 
-    cout << "RESUMEN DE LA COMPRA:" << endl;
+    cout << "RESUMEN DE LA COMPRA:" << endl
+         << endl;
     for (int i = 1; i <= numeroBoletos; i++)
     {
-        cout << "Boleto #" << i << endl;
-        carritoCompra[i].mostrarInfo();
+        cout << "Boleto #" << i << endl
+             << endl;
+        carritoCompra[i - 1].mostrarInfo();
+        cout << endl;
     }
-    cout << "Total: $" << numeroBoletos * this->precio_boleto << endl;
+    cout << "Subtotal: $" << subtotalCompra << endl;
+    cout << "IVA (12%): $" << subtotalCompra * 0.12 << endl;
+    cout << "Total: $" << subtotalCompra * 1.12 << endl
+         << endl;
 }
 
 int Cine::activarMenuPrincipal()
@@ -110,16 +142,18 @@ int Cine::activarMenuPrincipal()
     cout << "1. Mostrar Cartelera" << endl
          << "2. Mostrar Sala" << endl
          << "3. Comprar boletos" << endl
-         << "4. Salir" << endl;
+         << "4. Salir" << endl
+         << endl;
 
     int op = 0;
     do
     {
         cout << "Ingrese su opcion:" << endl;
         cin >> op;
-
+        cout << endl;
         if (op < 1 || op > 4)
-            cout << "Opcion invalida, intente de nuevo." << endl;
+            cout << "Opcion invalida, intente de nuevo." << endl
+                 << endl;
 
     } while (op < 1 || op > 4);
 

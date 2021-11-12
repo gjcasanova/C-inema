@@ -11,7 +11,6 @@ using namespace std;
 class Cine
 {
 private:
-    float precio_boleto;
     vector<Sala> salas;
     vector<Pelicula> cartelera;
 

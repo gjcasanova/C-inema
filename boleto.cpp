@@ -21,12 +21,13 @@ void Boleto::mostrarInfo()
     int dimensionX = 80;
     string filaSala = "Sala: " + to_string(this->sala);
     string filaHora = "Hora: " + this->pelicula.getHora();
-    string filaAsiento = "Asiento: " + to_string(this->fila) + to_string(this->columna);
+    string filaAsiento = "Asiento: " + string(1, this->fila) + to_string(this->columna);
     string filaPelicula = "Pelicula: " + this->pelicula.getTitulo();
 
     cout << "╔" << this->generarSecuencias(dimensionX - 2, "═") << "╗" << endl;
     cout << "║ " << filaSala << this->generarSecuencias(dimensionX - 3 - filaSala.size(), " ") << "║" << endl;
     cout << "║ " << filaHora << this->generarSecuencias(dimensionX - 3 - filaHora.size(), " ") << "║" << endl;
+    cout << "║ " << filaAsiento << this->generarSecuencias(dimensionX - 3 - filaAsiento.size(), " ") << "║" << endl;
     cout << "║ " << filaPelicula << this->generarSecuencias(dimensionX - 3 - filaPelicula.size(), " ") << "║" << endl;
     cout << "╚" << this->generarSecuencias(dimensionX - 2, "═") << "╝" << endl;
 }
