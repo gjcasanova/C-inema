@@ -24,6 +24,7 @@ Pelicula::Pelicula(int id, string titulo, float duracion, bool estreno, string h
 
 void Pelicula::mostrarInfo()
 {
+    // Imprime en una sola linea los datos a mostrarse en cartelera.
     cout << this->id << " - [" << this->hora << "] " << this->titulo << " (" << duracion << ") " << (this->estreno ? "* ESTRENO *" : "") << " " << (this->vermounth ? "* VERMOUNTH *" : "") << " [$ " << this->getPrecio() << "]" << endl;
 }
 

@@ -1,6 +1,7 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
 #include "cine.h"
-#include "sala.h"
 
 using namespace std;
 

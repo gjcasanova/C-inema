@@ -1,7 +1,9 @@
 #ifndef BOLETO_H
 #define BOLETO_H
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
 #include "sala.h"
 #include "pelicula.h"
 

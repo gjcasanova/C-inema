@@ -1,7 +1,9 @@
 #ifndef PELICULA_H
 #define PELICULA_H
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
 
 using namespace std;
 

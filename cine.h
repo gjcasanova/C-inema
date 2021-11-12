@@ -1,7 +1,9 @@
 #ifndef CINE_H
 #define CINE_H
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
 #include "sala.h"
 #include "pelicula.h"
 #include "boleto.h"

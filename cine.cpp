@@ -4,11 +4,13 @@
 
 Cine::Cine()
 {
+    // Llama a la funcion generadora
     this->generarDatos();
 }
 
 void Cine::generarDatos()
 {
+    // Instancia y carga la cartelera y las salas.
     this->cartelera = {
         Pelicula(1, "El Rey Leon", (float)117, true, "10:30", (float)5, true),
         Pelicula(2, "Spiderman: Lejos de Casa", (float)130, true, "16:00", (float)3, false),
@@ -34,6 +36,8 @@ void Cine::mostrarCartelera()
 
 void Cine::mostrarSala()
 {
+    // Solicita al usuario especificar la sala a mostrar y luego de validar la entrada muestra la distribucion
+    // de asientos.
     int peliculaId = 0;
     do
     {
@@ -51,6 +55,7 @@ void Cine::mostrarSala()
 
 void Cine::comprarBoletos()
 {
+    // Abarca todo el proceso de compra de boletos.
     int peliculaId = -1, columna = -1, numeroBoletos = 0;
     char fila = ' ';
     vector<Boleto> carritoCompra;
@@ -81,6 +86,8 @@ void Cine::comprarBoletos()
                  << endl;
     } while (numeroBoletos <= 0);
 
+
+    // Valida que exista la cantidad de boletos que desea el usuario.
     if (numeroBoletos > this->salas[peliculaId - 1].getAsientosDisponibles())
     {
         cout << "No hay disponibilidad de asientos. Cancelando compra..." << endl
@@ -88,11 +95,11 @@ void Cine::comprarBoletos()
         return;
     }
 
-    float subtotalCompra = 0;
+    float subtotalCompra = 0; // Acumula el subtotal generado por cada boleto adquirido
     for (int i = 1; i <= numeroBoletos; i++)
     {
-        char f;
-        int c;
+        char f; // Fila
+        int c; // Columna
         do
         {
             cout << "Boleto # " << i << endl;
@@ -110,17 +117,22 @@ void Cine::comprarBoletos()
         cin >> descuento;
         cout << endl;
 
+        // Permite al operador aplicar un descuento por edad de acuerdo al extra 3.
         if (descuento == 's')
             subtotalCompra += this->cartelera[peliculaId - 1].getPrecio() * 0.5; // Descuento del 50%
         else
             subtotalCompra += this->cartelera[peliculaId - 1].getPrecio();
 
+        // Se marca el asiento como ocupado.
         this->salas[peliculaId - 1]
             .ocuparAsiento(f, c);
+
+        // Se crea el boleto y se agrega al carrito de compras
         Boleto b = Boleto(this->cartelera[peliculaId - 1], peliculaId, f, c);
         carritoCompra.push_back(b);
     }
 
+    // Se muestran los boletos y los costos de la compra
     cout << "RESUMEN DE LA COMPRA:" << endl
          << endl;
     for (int i = 1; i <= numeroBoletos; i++)
@@ -130,6 +142,8 @@ void Cine::comprarBoletos()
         carritoCompra[i - 1].mostrarInfo();
         cout << endl;
     }
+
+    // Extra 1
     cout << "Subtotal: $" << subtotalCompra << endl;
     cout << "IVA (12%): $" << subtotalCompra * 0.12 << endl;
     cout << "Total: $" << subtotalCompra * 1.12 << endl
@@ -138,6 +152,7 @@ void Cine::comprarBoletos()
 
 int Cine::activarMenuPrincipal()
 {
+    // Muestra el menu y retorna la seleccion del usuario.
     cout << "++ MENU PRINCIPAL ++" << endl;
     cout << "1. Mostrar Cartelera" << endl
          << "2. Mostrar Sala" << endl
@@ -162,6 +177,7 @@ int Cine::activarMenuPrincipal()
 
 void Cine::activarConsola()
 {
+    // Lanza la consola interactiva.
     cout << "-- MI CINE --" << endl
          << endl;
     int op = -1;
