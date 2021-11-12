@@ -15,8 +15,10 @@ private:
     char fila;
     int columna;
 
+    string generarSecuencias(int n, string s);
+
 public:
-    Boleto(Pelicula pelicula, char fila, int columna);
+    Boleto(Pelicula pelicula, int sala, char fila, int columna);
     void mostrarInfo();
 };
 

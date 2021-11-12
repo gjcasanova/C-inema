@@ -22,3 +22,13 @@ void Pelicula::mostrarInfo()
 {
     cout << "[" << this->hora << "] " << this->titulo << " (" << duracion << ") " << (this->estreno ? "* ESTRENO *" : "") << endl;
 }
+
+string Pelicula::getTitulo()
+{
+    return this->titulo;
+}
+
+string Pelicula::getHora()
+{
+    return this->hora;
+}
