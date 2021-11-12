@@ -2,6 +2,7 @@
 
 Sala::Sala()
 {
+    this->asientosDisponibles = 0;
     this->numero = -1;
     this->numFilas = 0;
     this->numColumnas = 0;
@@ -11,6 +12,7 @@ Sala::Sala()
 
 Sala::Sala(int numero, int numFilas, int numColumnas)
 {
+    this->asientosDisponibles = numFilas * numColumnas;
     this->numero = numero;
     this->numFilas = numFilas;
     this->numColumnas = numColumnas;
@@ -50,6 +52,7 @@ void Sala::ocuparAsiento(char fila, int columna) // Indexados en 1
     if (this->estaDisponible(fila, columna))
     {
         this->asientos[filaIdx][columnaIdx] = true;
+        this->asientosDisponibles--;
         cout << "Asiento reservado exitosamente" << endl;
     }
     else
@@ -60,6 +63,7 @@ void Sala::ocuparAsiento(char fila, int columna) // Indexados en 1
 
 void Sala::limpiar()
 {
+    this->asientosDisponibles = this->numFilas * this->numColumnas;
     for (int i = 0; i < asientos.size(); i++)
     {
         for (int j = 0; j < asientos[i].size(); j++)
@@ -73,4 +77,9 @@ bool Sala::estaDisponible(char fila, int columna)
 {
     int filaIdx = (int)fila - 65, columnaIdx = columna - 1;
     return columnaIdx >= 0 && filaIdx >= 0 && filaIdx < this->numFilas && columnaIdx < this->numColumnas && !this->asientos[filaIdx][columnaIdx];
+}
+
+int Sala::getAsientosDisponibles()
+{
+    return this->asientosDisponibles;
 }

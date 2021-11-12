@@ -16,7 +16,7 @@ private:
 
 public:
     Pelicula();
-    Pelicula(int id, int titulo, float duracion, bool estreno, string hora);
+    Pelicula(int id, string titulo, float duracion, bool estreno, string hora);
     string getTitulo();
     string getHora();
     void mostrarInfo();

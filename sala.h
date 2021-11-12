@@ -11,6 +11,7 @@ private:
     int numero;
     int numFilas;
     int numColumnas;
+    int asientosDisponibles;
     vector<vector<bool>> asientos;
     vector<char> filas;
 
@@ -21,6 +22,7 @@ public:
     void ocuparAsiento(char fila, int columna);
     void limpiar();
     bool estaDisponible(char fila, int columna);
+    int getAsientosDisponibles();
 };
 
 #endif

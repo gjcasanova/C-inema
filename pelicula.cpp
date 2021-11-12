@@ -9,7 +9,7 @@ Pelicula::Pelicula()
     this->hora = "";
 }
 
-Pelicula::Pelicula(int id, int titulo, float duracion, bool estreno, string hora)
+Pelicula::Pelicula(int id, string titulo, float duracion, bool estreno, string hora)
 {
     this->id = id;
     this->titulo = titulo;
